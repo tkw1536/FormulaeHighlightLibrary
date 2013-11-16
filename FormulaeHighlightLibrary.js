@@ -1,5 +1,5 @@
 var FHL = {
-	"getElementsByXMlId": function(doc, id){
+	"getElementByXMLId": function(doc, id){
 		if(typeof id == "undefined"){
 			id = doc; 
 			doc = document; 
@@ -42,8 +42,8 @@ var FHL = {
 
 		return doc;
 	},
-	"getSemantics": function(id, xpath){
-		var base = FHL.getElementsByXMlId(id); 
+	"getSemantic": function(id, xpath){
+		var base = FHL.getElementByXMLId(id); 
 		base = base.getElementsByTagName("m:semantics")[0];
 		base = base.getElementsByTagName("m:annotation-xml");
 
@@ -58,13 +58,13 @@ var FHL = {
 		return FHL.getElementBySimpleXPath(annottree, xpath); 
 	},
 	"getPresentation": function(id, xpath){
-		var base = FHL.getElementsByXMlId(id);
+		var base = FHL.getElementByXMLId(id);
 
-		var semantics = FHL.getSemantics(id, xpath); 
+		var semantics = FHL.getSemantic(id, xpath); 
 		if(typeof semantics == "undefined"){
 			return undefined; 
 		} else {
-			return FHL.getElementsByXMlId(base, semantics.getAttribute("xref")); 
+			return FHL.getElementByXMLId(base, semantics.getAttribute("xref")); 
 		}
 	}
 }
