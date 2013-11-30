@@ -1,9 +1,6 @@
 var FHL = {
-	"getElementByXMLId": function(doc, id){
-		if(typeof id == "undefined"){
-			id = doc; 
-			doc = document; 
-		}
+	"getElementByXMLId": function(id, doc){
+		var doc = (typeof doc == "undefined")?document:doc; 
 
 		var items = doc.getElementsByTagName("*");
 		for (var i = items.length; i--;) {
@@ -15,11 +12,9 @@ var FHL = {
 		}
 		return undefined;
 	},
-	"getElementBySimpleXPath": function(doc, xpath){
-		if(typeof xpath == "undefined"){
-			xpath = doc; 
-			doc = document; 
-		}		
+	"getElementBySimpleXPath": function(xpath, doc){
+		var doc = (typeof doc == "undefined")?document:doc; 
+
 		xpath = xpath
 		.split("/").join("")
 		.split("[").join("")
@@ -42,8 +37,9 @@ var FHL = {
 
 		return doc;
 	},
-	"getSemantic": function(id, xpath){
-		var base = FHL.getElementByXMLId(id); 
+	"getSemantic": function(id, xpath, doc){
+		var doc = (typeof doc == "undefined")?document:doc; 
+		var base = FHL.getElementByXMLId(id, doc); 
 		base = base.getElementsByTagName("m:semantics")[0];
 		base = base.getElementsByTagName("m:annotation-xml");
 
@@ -55,16 +51,17 @@ var FHL = {
 			} 
 		}
 
-		return FHL.getElementBySimpleXPath(annottree, xpath); 
+		return FHL.getElementBySimpleXPath(xpath, annottree); 
 	},
-	"getPresentation": function(id, xpath){
-		var base = FHL.getElementByXMLId(id);
-
+	"getPresentation": function(id, xpath, doc){
+		var doc = (typeof doc == "undefined")?document:doc; 
+		var base = FHL.getElementByXMLId(id, doc);
 		var semantics = FHL.getSemantic(id, xpath); 
+		
 		if(typeof semantics == "undefined"){
 			return undefined; 
 		} else {
-			return FHL.getElementByXMLId(base, semantics.getAttribute("xref")); 
+			return FHL.getElementByXMLId(semantics.getAttribute("xref"), base); 
 		}
 	}
 }
