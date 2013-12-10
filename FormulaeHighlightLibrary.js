@@ -5,7 +5,7 @@ var FHL = {
 		var items = doc.getElementsByTagName("*");
 		for (var i = items.length; i--;) {
 		    try{
-		    	if(items[i].getAttribute("xml:id") == id){
+		    	if(items[i].getAttribute("local_id") == id){
 		    		return items[i]; 
 		    	}
 		    } catch(e){}; 
@@ -37,31 +37,30 @@ var FHL = {
 
 		return doc;
 	},
-	"getSemantic": function(id, xpath, doc){
-		var doc = (typeof doc == "undefined")?document:doc; 
-		var base = FHL.getElementByXMLId(id, doc); 
-		base = base.getElementsByTagName("m:semantics")[0];
-		base = base.getElementsByTagName("m:annotation-xml");
+	"getSemantic": function(xpath, doc){
+		var doc = (typeof doc == "undefined")?document:doc;
+		var base = doc;
+		base = base.getElementsByTagName("m:semantics")[0] || base.getElementsByTagName("semantics")[0];
+		base = base.getElementsByTagName("m:annotation-xml")[0] || base.getElementsByTagName("annotation-xml")[0];
 
-		var annottree = base[0]; 
+		var annottree = base;
 		for(var i=0;i<base.length;i++){
-			if(base[i].getAttribute("encoding") == ""){
-				annottree = base[i]; 
-				break; 
-			} 
+			if(base[i].getAttribute("encoding") == "MathML-Content"){
+				annottree = base[i];
+				break;
+			}
 		}
 
 		return FHL.getElementBySimpleXPath(xpath, annottree); 
 	},
-	"getPresentation": function(id, xpath, doc){
-		var doc = (typeof doc == "undefined")?document:doc; 
-		var base = FHL.getElementByXMLId(id, doc);
-		var semantics = FHL.getSemantic(id, xpath); 
+	"getPresentation": function(xpath, doc){
+		var doc = (typeof doc == "undefined")?document:doc;
+		var semantics = FHL.getSemantic(xpath, doc);
 		
 		if(typeof semantics == "undefined"){
 			return undefined; 
 		} else {
-			return FHL.getElementByXMLId(semantics.getAttribute("xref"), base); 
+			return FHL.getElementByXMLId(semantics.getAttribute("xref"), doc);
 		}
 	}
 }
