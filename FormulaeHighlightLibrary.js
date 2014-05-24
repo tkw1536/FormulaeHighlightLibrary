@@ -16,7 +16,7 @@ var FHL = {
 	 * @function getElementByXMLId
 	 * @memberof FHL
 	 * 
-	 * Finds an element By Its XML local_id attribute
+	 * Finds an element By Its xml:id attribute
 	 * @param {string} id Id to look for
 	 * @param {HTMLElement} [doc = document] Root node to start searching at. 
 	 * @returns {HTMLElement|undefined} The DOM Node with the given attributes or undefined. 
@@ -27,7 +27,7 @@ var FHL = {
 		var items = doc.getElementsByTagName("*");
 		for (var i = items.length; i--;) {
 		    try{
-		    	if(items[i].getAttribute("local_id") == id){
+		    	if(items[i].getAttribute("xml:id") == id){
 		    		return items[i]; 
 		    	}
 		    } catch(e){}; 
