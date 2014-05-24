@@ -7,11 +7,15 @@
   <body>
 
   <div>
-    <h1>Math Highlighting</h1>
-    
-    Suppose we have a simple MathML Element: <br />
+    <h1>Simple Math Highlighting</h1>
 
+    <p>
+      If the browser can natively render MathML Elements, the use of the library is simple. 
 
+      Say we have a simple MathML Element: 
+    </p>
+
+    <p>
     <!--  Math Element 1 -->
     <m:math
     xmlns="http://zentralblatt.org" alttext="R_{{\alpha,\beta,n}}\equiv\frac{[\sqrt{(\alpha+n)^{2}+\beta^{2}}-\sqrt{(\alpha%&#10;+n)^{2}-\alpha^{2}}]^{{1/n}}}{[\alpha^{2}+\beta^{2}]^{{1/2n}}}" xml:id="m19.1" display="inline" xref="m19.1.cmml">
@@ -211,38 +215,42 @@
       +n)^{2}-\alpha^{2}}]^{{1/n}}}{[\alpha^{2}+\beta^{2}]^{{1/2n}}}</m:annotation>
           </m:semantics>
       </m:math>
+      </p>
+      
 
-      <br />
+      <p>
+        and we want to highlight parts of it in a specific color. For this we first have to find the id of the MathML Element (in this case "m19.1") and the XPath to the Part of the formular we want to highlight. 
+      </p>
 
-      and we want to highlight parts of it in a specific color. For this we first have to find the id of the MathML Element (in this case "m19.1") and the XPath to the Part of the formular we want to highlight. 
-
-      Then we can use the following code to toggle the colouring on and off: 
+      <p>
+        Then we can use the following code to toggle the colouring on and off: 
 
       <!-- Example Code 1 -->
 
-      <pre>
-        <span style='color:#808080; '>//Get the MathML root element</span>
-        <span style='color:#000084; font-weight:bold; '>var</span> MathMLElement = FHL.getElementByXMLId(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>m19.1</span><span style='color:#0000ff; '>"</span>); 
+        <pre>
+<span style='color:#808080; '>//Get the MathML root element</span>
+<span style='color:#000084; font-weight:bold; '>var</span> MathMLElement = FHL.getElementByXMLId(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>m19.1</span><span style='color:#0000ff; '>"</span>); 
 
-        <span style='color:#808080; '>//The XPath to the part of the forumlar we want to highlight. </span>
-        <span style='color:#000084; font-weight:bold; '>var</span> xPath = <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>/*[1]/*[3]/*[2]/*[2]/*[2]/*[2]/*[2]</span><span style='color:#0000ff; '>"</span>;
+<span style='color:#808080; '>//The XPath to the part of the forumlar we want to highlight. </span>
+<span style='color:#000084; font-weight:bold; '>var</span> xPath = <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>/*[1]/*[3]/*[2]/*[2]/*[2]/*[2]/*[2]</span><span style='color:#0000ff; '>"</span>;
 
-        <span style='color:#808080; '>//find the element we want to color</span>
-        <span style='color:#000084; font-weight:bold; '>var</span> elem = FHL.getPresentation(xPath, MathMLElement);
+<span style='color:#808080; '>//find the element we want to color</span>
+<span style='color:#000084; font-weight:bold; '>var</span> elem = FHL.getPresentation(xPath, MathMLElement);
 
-        <span style='color:#808080; '>//Lets check if this element is already colored</span>
-        <span style='color:#000084; font-weight:bold; '>if</span>(elem.getAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>mathcolor</span><span style='color:#0000ff; '>"</span>) !== <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>blue</span><span style='color:#0000ff; '>"</span>){
+<span style='color:#808080; '>//Lets check if this element is already colored</span>
+<span style='color:#000084; font-weight:bold; '>if</span>(elem.getAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>mathcolor</span><span style='color:#0000ff; '>"</span>) !== <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>blue</span><span style='color:#0000ff; '>"</span>){
+  <span style='color:#808080; '>//its not blue yet so make it blue</span>
+  elem.setAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>mathcolor</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>blue</span><span style='color:#0000ff; '>"</span>);
+} <span style='color:#000084; font-weight:bold; '>else</span> {
+  <span style='color:#808080; '>//it is already blue, lets turn it black again</span>
+  elem.setAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>mathcolor</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>black</span><span style='color:#0000ff; '>"</span>);
+}
+        </pre>
+      </p>
 
-          <span style='color:#808080; '>//its not blue yet so make it blue</span>
-          elem.setAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>mathcolor</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>blue</span><span style='color:#0000ff; '>"</span>);
-          
-        } <span style='color:#000084; font-weight:bold; '>else</span> {
-          <span style='color:#808080; '>//it is already blue, lets trun it black again</span>
-          elem.setAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>mathcolor</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>black</span><span style='color:#0000ff; '>"</span>);
-        }
-      </pre>
-
-      <span id="example1"></span>
+      <p>
+        <span id="example1"></span> (for result see MathML element above)
+      </p>
 
       <script>
         (function(){
@@ -262,12 +270,10 @@
 
             //Lets check if this element is already colored
             if(elem.getAttribute("mathcolor") !== "blue"){
-
               //its not blue yet so make it blue
               elem.setAttribute("mathcolor", "blue");
-
             } else {
-              //it is already blue, lets trun it black again
+              //it is already blue, lets turn it black again
               elem.setAttribute("mathcolor", "black");
             }
 
@@ -277,6 +283,24 @@
         })();
       </script>
       <!-- /Example Code 1 -->
+
+      <h1>Use together with MathJax</h1>
+
+      <p>
+        In some cases, native MathML support from the browser is not available (such as in Google Chrome). In this case, it is possible to use MathJax to render the Element. In this case it is also possible to add colors to the element, however if they are supposed to be triggered on and off afterwards, it is neccessary to use a little trick: We add a CSS class to the element. MathJax, when rendering the element, also adds this class to the output and it is easily possible to refer to the element later. 
+      </p>
+
+      <p>
+        We use the following code: 
+      </p>
+
+      <p>
+        (Code to be written)
+      </p>
+
+      <p>
+        Note that this code also works in browsers which natively support MathML. 
+      </p>
 
 
     </div>
