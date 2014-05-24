@@ -1,23 +1,3 @@
-# What's this about?
-
-This is a really simple highlighting Library for Math Formulaes (and text). It was opriginally witten for use with [MathWebSearch](http://search.mathweb.org/). 
-
-# Simple Example 
-
-If we want to highlight a specific part of a forumular you can: 
-
-```js
-var element = FHL.getPresentation("m19.1", "/*[1]/*[3]/*[2]/*[2]/*[2]/*[2]/*[2]"); 
-element.setAttribute("mathcolor", "blue"); 
-```
-
-API documentation can be found under ```doc/```. 
-
-A tutorial / demo can be found in [index.html](index.xhtml) or online at http://pages.w1536.tk/FormulaeHighlightLibrary/
-
-# License
-
-```
 The MIT License (MIT)
 
 Copyright (c) 2014 Tom Wiesing
@@ -39,4 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-```
