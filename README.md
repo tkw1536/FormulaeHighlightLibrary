@@ -7,7 +7,7 @@ This is a really simple highlighting Library for Math Formulaes (and text). It w
 If we want to highlight a specific part of a forumular you can: 
 
 ```js
-var element = FHL.getPresentation("m19.1", "/*[1]/*[3]/*[2]/*[2]/*[2]/*[2]/*[2]"); 
+var element = FHL.getPresentation("/*[1]/*[3]/*[2]/*[2]/*[2]/*[2]/*[2]", FHL.getElementByXMLId("m19.1")); 
 element.setAttribute("mathcolor", "blue"); 
 ```
 
