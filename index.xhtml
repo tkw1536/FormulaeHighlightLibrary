@@ -1,8 +1,23 @@
 <?xml version="1.0"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:zbl="http://zentralblatt.org" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:ltx="http://dlmf.nist.gov/LaTeXML">
   <head>
+      <title>FHL Example</title>
+
+      <!-- FHL -->
       <script src="FormulaeHighlightLibrary.js"></script>
-    <title/>
+
+
+      <!-- MathJax and Config -->
+      <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript">
+        //MathJax Configuration
+        //Disabled by default
+        MathJax.Hub.Config({
+          jax: ["input/MathML", "output/HTML-CSS","output/NativeMML"], 
+          skipStartupTypeset: true,  //do not auto parse things
+          elements: "example2" //restrict MathJax to lower example
+        });
+      </script>
   </head>
   <body>
 
@@ -122,7 +137,8 @@
                       <m:equivalent xml:id="m19.1.3.cmml" xref="m19.1.3"/>
                       <m:apply xml:id="m19.1.5.1.cmml" xref="m19.1.5.1">
                           <m:csymbol cd="ambiguous" xml:id="m19.1.5.1.1.cmml">subscript</m:csymbol>
-                          <m:ci xml:id="m19.1.1.cmml" xref="m19.1.1">R</m:ci>
+                          <m:ci xml:id="m19.1.1.cmml" xref="m19.1>
+.1">R</m:ci>
                           <m:apply xml:id="m19.1.2.1.cmml" xref="m19.1.2.1">
                               <m:list xml:id="m19.1.2.1.6.cmml"/>
                               <m:ci xml:id="m19.1.2.1.1.cmml" xref="m19.1.2.1.1">&#x3B1;</m:ci>
@@ -249,7 +265,7 @@
       </p>
 
       <p>
-        <span id="example1"></span> (for result see MathML element above)
+        <span id="example1-controls"></span> (for result see MathML element above)
       </p>
 
       <script>
@@ -279,7 +295,7 @@
 
           };
 
-          document.getElementById("example1").appendChild(element);
+          document.getElementById("example1-controls").appendChild(element);
         })();
       </script>
       <!-- /Example Code 1 -->
@@ -294,14 +310,142 @@
         We use the following code: 
       </p>
 
+      <!-- Example 2-->
       <p>
-        (Code to be written)
+        <pre>
+<span style='color:#808080; '>//Run this code once, on page load</span>
+<span style='color:#808080; '>//to stop MathJax from pre-processing</span>
+MathJax.Hub.Config({
+  jax: [<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>input/MathML</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>output/HTML-CSS</span><span style='color:#0000ff; '>"</span>,<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>output/NativeMML</span><span style='color:#0000ff; '>"</span>], 
+  skipStartupTypeset: <span style='color:#000084; font-weight:bold; '>true</span>, <span style='color:#808080; '>//do not auto parse things</span>
+  elements: <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>example2</span><span style='color:#0000ff; '>"</span> <span style='color:#808080; '>// restrict MathJax to the element with id example2</span>
+});
+
+<span style='color:#808080; '>/* ... */</span>
+
+<span style='color:#808080; '>//Run this code once all elements on the page have loaded</span>
+
+<span style='color:#808080; '>//find the element</span>
+<span style='color:#000084; font-weight:bold; '>var</span> MathMLElement = FHL.getElementByXMLId(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>m1.1</span><span style='color:#0000ff; '>"</span>); 
+
+<span style='color:#808080; '>//What do we want to find</span>
+<span style='color:#000084; font-weight:bold; '>var</span> xPath = <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>/*[1]/*[2]/*[2]</span><span style='color:#0000ff; '>"</span>; 
+
+<span style='color:#808080; '>//Lets find it</span>
+<span style='color:#000084; font-weight:bold; '>var</span> part = FHL.getPresentation(xPath, MathMLElement); 
+
+<span style='color:#808080; '>//and add a class</span>
+part.setAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>class</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>highlight</span><span style='color:#0000ff; '>"</span>); 
+
+<span style='color:#808080; '>//Lets type set it</span>
+MathJax.Hub.Queue([<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>Typeset</span><span style='color:#0000ff; '>"</span>,MathJax.Hub, MathMLElement.parent]);
+
+
+<span style='color:#808080; '>/* ... */</span>
+
+<span style='color:#808080; '>//Run this part of the code when you want to toggle the color of the elements</span>
+
+<span style='color:#808080; '>//Make sure MathJax is not still rendering by giving the callback to MathJax</span>
+MathJax.Hub.Queue(<span style='color:#000084; font-weight:bold; '>function</span> () {
+  
+  <span style='color:#808080; '>//get the highlight element from before. </span>
+  <span style='color:#000084; font-weight:bold; '>var</span> elem = document.getElementsByClassName(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>highlight</span><span style='color:#0000ff; '>"</span>)[0];
+
+
+  <span style='color:#000084; font-weight:bold; '>if</span>(elem.getAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>mathcolor</span><span style='color:#0000ff; '>"</span>) !== <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>blue</span><span style='color:#0000ff; '>"</span>){
+    <span style='color:#808080; '>//its not blue yet so make it blue</span>
+    elem.setAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>mathcolor</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>blue</span><span style='color:#0000ff; '>"</span>);
+    elem.setAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>style</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>color: blue; </span><span style='color:#0000ff; '>"</span>); 
+  } <span style='color:#000084; font-weight:bold; '>else</span> {
+    <span style='color:#808080; '>//it is already blue, lets turn it black again</span>
+    elem.setAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>mathcolor</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>black</span><span style='color:#0000ff; '>"</span>);
+    elem.setAttribute(<span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>style</span><span style='color:#0000ff; '>"</span>, <span style='color:#0000ff; '>"</span><span style='color:#0000ff; '>color: black; </span><span style='color:#0000ff; '>"</span>); 
+  }
+});
+</pre>
       </p>
+      <!-- /Example 2 -->
+
+      <p id="example2">
+          <m:math xmlns="http://zentralblatt.org" alttext="x^{2}-1=n!" xml:id="m1.1" display="inline" xref="m1.1.cmml"><m:semantics xml:id="m1.1a" xref="m1.1.cmml"><m:mrow xml:id="m1.1.8" xref="m1.1.8.cmml"><m:mrow xml:id="m1.1.8.1" xref="m1.1.8.1.cmml"><m:msup xml:id="m1.1.8.1.1" xref="m1.1.8.1.1.cmml"><m:mi xml:id="m1.1.1" xref="m1.1.1.cmml">x</m:mi><m:mn xml:id="m1.1.2.1" xref="m1.1.2.1.cmml">2</m:mn></m:msup><m:mo xml:id="m1.1.3" xref="m1.1.3.cmml">-</m:mo><m:mn xml:id="m1.1.4" xref="m1.1.4.cmml">1</m:mn></m:mrow><m:mo xml:id="m1.1.5" xref="m1.1.5.cmml">=</m:mo><m:mrow xml:id="m1.1.8.2" xref="m1.1.8.2.cmml"><m:mi xml:id="m1.1.6" xref="m1.1.6.cmml">n</m:mi><m:mi mathvariant="normal" xml:id="m1.1.7" xref="m1.1.7.cmml">!</m:mi></m:mrow></m:mrow><m:annotation-xml xml:id="m1.1.cmml" encoding="MathML-Content" xref="m1.1"><m:apply xml:id="m1.1.8.cmml" xref="m1.1.8"><m:eq xml:id="m1.1.5.cmml" xref="m1.1.5"></m:eq><m:apply xml:id="m1.1.8.1.cmml" xref="m1.1.8.1"><m:minus xml:id="m1.1.3.cmml" xref="m1.1.3"></m:minus><m:apply xml:id="m1.1.8.1.1.cmml" xref="m1.1.8.1.1"><m:csymbol cd="ambiguous" xml:id="m1.1.8.1.1.1.cmml">superscript</m:csymbol><m:ci xml:id="m1.1.1.cmml" xref="m1.1.1">x</m:ci><m:cn type="integer" xml:id="m1.1.2.1.cmml" xref="m1.1.2.1">2</m:cn></m:apply><m:cn type="integer" xml:id="m1.1.4.cmml" xref="m1.1.4">1</m:cn></m:apply><m:apply xml:id="m1.1.8.2.cmml" xref="m1.1.8.2"><m:factorial xml:id="m1.1.7.cmml" xref="m1.1.7"></m:factorial><m:ci xml:id="m1.1.6.cmml" xref="m1.1.6">n</m:ci></m:apply></m:apply></m:annotation-xml><m:annotation xml:id="m1.1b" encoding="application/x-tex" xref="m1.1.cmml">x^{2}-1=n!</m:annotation></m:semantics></m:math>
+      </p>
+
+      <p>
+        <span id="example2-controls"></span> (Hit the init button first or it wont work. )
+      </p>
+
+      <script>
+        (function(){
+          var element = document.createElement("input");
+          element.type = "button";
+          element.value = "Init";
+          element.onclick = function() {
+
+            //find the element
+            var MathMLElement = FHL.getElementByXMLId("m1.1"); 
+
+            //What do we want to find
+            var xPath = "/*[1]/*[2]/*[2]"; 
+
+            //Lets find it
+            var part = FHL.getPresentation(xPath, MathMLElement); 
+          
+            //and add a class
+            part.setAttribute("class", "highlight"); 
+
+            //Lets type set it
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub, MathMLElement.parent]);
+
+            //Disable this button
+            element.disabled = true; 
+          };
+
+          document.getElementById("example2-controls").appendChild(element);
+        })();
+      </script>
+
+      <script>
+        (function(){
+          var element = document.createElement("input");
+          element.type = "button";
+          element.value = "Run code";
+          element.onclick = function() {
+            //Make sure MathJax is not still rendering by giving the callback to MathJax
+            MathJax.Hub.Queue(function () {
+              
+              //get the highlight element from before. 
+              var elem = document.getElementsByClassName("highlight")[0];
+
+
+              if(elem.getAttribute("mathcolor") !== "blue"){
+                //its not blue yet so make it blue
+                elem.setAttribute("mathcolor", "blue");
+                elem.setAttribute("style", "color: blue; "); 
+              } else {
+                //it is already blue, lets turn it black again
+                elem.setAttribute("mathcolor", "black");
+                elem.setAttribute("style", "color: black; "); 
+              }
+            }); 
+          }
+
+          document.getElementById("example2-controls").appendChild(element);
+        })();
+      </script>
 
       <p>
         Note that this code also works in browsers which natively support MathML. 
       </p>
 
+      <h1>API documentation and source code</h1>
+
+      <p>
+        The API documentation can be found at <a href="doc/">/doc/</a>
+      </p>
+
+      <p>
+        The entire source code can be found on GitHub: <a href="https://github.com/tkw1536/FormulaeHighlightLibrary">https://github.com/tkw1536/FormulaeHighlightLibrary</a>
+      </p>
 
     </div>
   </body>

@@ -1,10 +1,12 @@
 # What's this about?
 
-This is a really simple highlighting Library for Math Formulaes (and text). It was opriginally witten for use with [MathWebSearch](http://search.mathweb.org/). 
+This is a really simple stand-alone highlighting Library for Math Formulaes. It was opriginally witten for use with [MathWebSearch](http://search.mathweb.org/). 
+
+The main source can be found in "FormulaeHighlightLibrary.js". 
 
 # Simple Example 
 
-If we want to highlight a specific part of a forumular you can: 
+If we want to highlight a specific part of a formular you can: 
 
 ```js
 var element = FHL.getPresentation("/*[1]/*[3]/*[2]/*[2]/*[2]/*[2]/*[2]", FHL.getElementByXMLId("m19.1")); 
@@ -13,7 +15,7 @@ element.setAttribute("mathcolor", "blue");
 
 API documentation can be found under ```doc/```. 
 
-A tutorial / demo can be found in [index.html](index.xhtml) or online at http://pages.w1536.tk/FormulaeHighlightLibrary/
+A tutorial / demo can be found in index.xhtml or online at http://pages.w1536.tk/FormulaeHighlightLibrary/
 
 # License
 
